@@ -1,4 +1,6 @@
 function updateWeather(response) {
+  let cityElement = document.querySelector("#city-name");
+  cityElement.innerHTML = response.data.city;
   let tempElement = document.querySelector("#temp");
   tempElement.innerHTML = Math.round(response.data.temperature.current);
   let humidityElement = document.querySelector("#humidity");
@@ -10,6 +12,8 @@ function updateWeather(response) {
   let now = new Date(response.data.time * 1000);
   let dateElement = document.querySelector("#date");
   dateElement.innerHTML = formatDate(now);
+  let iconElement = document.querySelector("#icon");
+  iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-icon" />`;
 }
 function formatDate(now) {
   let days = [
@@ -42,3 +46,4 @@ function cityName(event) {
 }
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", cityName);
+searchCity("Paris");
