@@ -44,6 +44,27 @@ function cityName(event) {
   city.innerHTML = input.value;
   searchCity(input.value);
 }
+function displayForecast(){
+  let days=["Tue","Wen","Thu","Fri","Sat"]
+  let forecastHtml=""
+  days.forEach(function(day){
+    forecastHtml=forecastHtml + `
+    <div class="forecast-day">
+      <div class="forecast-date">${day}</div>
+      <div class="forecast-icon">☁️</div>
+      <div class="forecast-temperatures">
+        <div class="forecast-temperature">
+          <strong>15°</strong>
+        </div>
+        <div class="forecast-temperature">9°</div>
+      </div>
+    </div>`;
+
+  })
+  let forecastElement=document.querySelector("#forecast")
+  forecastElement.innerHTML=forecastHtml
+}
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", cityName);
 searchCity("Paris");
+displayForecast()
