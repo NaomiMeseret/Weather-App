@@ -50,19 +50,19 @@ function getForecast(city) {
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}& units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
-function formatDay(timeStamp){
-  let date=new Date(timeStamp * 1000)
-  let days=["Sun","Mon","Tue","Wen","Thu","Fri","Sat"]
-  return days[date.getDay()]; 
+function formatDay(timeStamp) {
+  let date = new Date(timeStamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat"];
+  return days[date.getDay()];
 }
 function displayForecast(response) {
   let days = ["Tue", "Wen", "Thu", "Fri", "Sat"];
   let forecastHtml = "";
-  response.data.daily.forEach(function (day,index) {
-    if(index < 5){
+  response.data.daily.forEach(function (day, index) {
+    if (index < 5) {
       forecastHtml =
-      forecastHtml +
-      `
+        forecastHtml +
+        `
     <div class="forecast-day">
       <div class="forecast-date">${formatDay(day.time)}</div>
      <img src="${day.condition.icon_url}"  class="forecast-icon"/>
@@ -71,13 +71,15 @@ function displayForecast(response) {
           <strong>${Math.round(day.temperature.maximum)}°</strong>
         </div>
         <div class="forecast-temperature">${Math.round(
-          day.temperature.minimum)}°</div>
+          day.temperature.minimum
+        )}°</div>
       </div>
-    </div>`;}
+    </div>`;
+    }
   });
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = forecastHtml;
 }
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", cityName);
-searchCity("Paris");
+searchCity("Addis Ababa");
